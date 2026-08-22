@@ -1,58 +1,85 @@
 # Hands-On Q-Learning with Python
+This repository contains the original chapter examples for *Hands-On
+Q-Learning with Python* and a consolidated collection of Nazia Habib's later
+reinforcement-learning, Markov-process, function-approximation, and numerical
+notebooks.
 
-<a href="https://www.packtpub.com/big-data-and-business-intelligence/hands-q-learning-python?utm_source=github&utm_medium=repository&utm_campaign=9781789345803 "><img src="https://dz13w8afd47il.cloudfront.net/sites/default/files/imagecache/ppv4_main_book_cover/cover_34.png" alt="Hands-On Q-Learning with Python" height="256px" align="right"></a>
+The repository has two deliberately separate layers:
 
-This is the code repository for [Hands-On Q-Learning with Python](https://www.packtpub.com/big-data-and-business-intelligence/hands-q-learning-python?utm_source=github&utm_medium=repository&utm_campaign=9781789345803 ), published by Packt.
+- `examples/` contains maintained, small examples that run on current Python.
+- `notebooks/` and `legacy/` preserve research and educational records whose
+  dependencies vary by collection.
 
-**Practical Q-learning with OpenAI Gym, Keras, and TensorFlow**
+Historical material is not silently presented as maintained software. Every
+imported collection retains its source repository in
+[`notebooks/INVENTORY.csv`](notebooks/INVENTORY.csv), and its validation status
+is reported by `scripts/audit_notebooks.py`.
 
-## What is this book about?
-Q-learning is a machine learning algorithm used to solve optimization problems in artificial intelligence (AI). It is one of the most popular fields of study among AI researchers.
+## Quick start
 
-This book covers the following exciting features:
-Explore the fundamentals of reinforcement learning and the state-action-reward process 
-Understand Markov decision processes 
-Get well versed with libraries such as Keras, and TensorFlow 
-Create and deploy model-free learning and deep Q-learning agents with TensorFlow, Keras, and OpenAI Gym 
-Choose and optimize a Q-Network’s learning parameters and fine-tune its performance 
-Discover real-world applications and use cases of Q-learning 
+Python 3.10 through 3.12 is recommended.
 
-If you feel this book is for you, get your [copy](https://www.amazon.com/dp/1789345804) today!
-
-<a href="https://www.packtpub.com/?utm_source=github&utm_medium=banner&utm_campaign=GitHubBanner"><img src="https://raw.githubusercontent.com/PacktPublishing/GitHub/master/GitHub.png" 
-alt="https://www.packtpub.com/" border="5" /></a>
-
-## Instructions and Navigations
-All of the code is organized into folders. For example, Chapter02.
-
-The code will look like the following:
-```
-import gym
-import numpy as np
-env = gym.make('Taxi-v2')
-state = env.reset()
+```bash
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install -e '.[dev,notebooks,rl]'
+pytest
+python examples/taxi_random.py --episodes 3
+python examples/taxi_q_learning.py --episodes 200
 ```
 
-**Following is what you need for this book:**
-If you are a machine learning developer, engineer, or professional who wants to delve into the deep learning approach for a complex environment, then this is the book for you. Proficiency in Python programming and basic understanding of decision-making in reinforcement learning is assumed.
+Open the consolidated notebooks with:
 
-With the following software and hardware list you can run all code files present in the book (Chapter 1-8).
-### Software and Hardware List
-| Chapter | Software required | 
-| -------- | ------------------------------------ | 
-| 1-8 | Python 3.5+, OpenAI Gym, Keras, TensorFlow(tentative)  |  
+```bash
+jupyter lab notebooks
+```
 
+Some archived notebooks use TensorFlow or PyTorch. Install only the profile
+you need:
 
-We also provide a PDF file that has color images of the screenshots/diagrams used in this book. [Click here to download it](https://www.packtpub.com/sites/default/files/downloads/9781789345803_ColorImages.pdf).
+```bash
+python -m pip install -e '.[tensorflow]'
+python -m pip install -e '.[torch]'
+```
 
-### Related products
-* Hands-On Meta Learning with Python  [[Packt]](https://prod.packtpub.com/in/big-data-and-business-intelligence/hands-meta-learning-python?utm_source=github&utm_medium=repository&utm_campaign=) [[Amazon]](https://www.amazon.com/dp/1789534208)
+## Repository map
 
-* Hands-On Transfer Learning with Python  [[Packt]](https://prod.packtpub.com/in/big-data-and-business-intelligence/hands-transfer-learning-python?utm_source=github&utm_medium=repository&utm_campaign=) [[Amazon]](https://www.amazon.com/dp/1788831306)
+| Location | Purpose | Support level |
+|---|---|---|
+| `examples/` | Current, deterministic examples | Maintained and tested |
+| `Chapter03` through `Chapter07` | Original book code | Historical source |
+| `notebooks/numpy/` | NumPy-only source repository | Validated notebook documents |
+| `notebooks/markov_processes/` | Markov chains, bandits, and value tables | Research record |
+| `notebooks/function_approximation/` | Regression and learned-function studies | Research record |
+| `notebooks/matrix_arithmetic/` | NumPy, TensorFlow, and matrix workshops | Research record |
+| `notebooks/rl_agents/` | CartPole, SARSA, Q-learning, and DQN studies | Research record |
+| `legacy/smartcab/` | Older pygame Smartcab project | Preserved legacy application |
 
-## Get to Know the Author
-**Nazia Habib**
-is a data scientist who has worked in a variety of industries to generate predictive analytics solutions for diverse groups of stakeholders. She is an expert in building solutions to optimization problems under conditions of uncertainty. Her projects range from predicting user behavior and engagement with social media apps to designing adaptive testing software. Her ongoing specialization is in designing custom reinforcement learning algorithms for modeling control problems with limited inputs that converge to optimal solutions.
+See [`notebooks/README.md`](notebooks/README.md) for collection-level guidance
+and [`MIGRATION.md`](MIGRATION.md) for the complete repository disposition.
+The status of all twelve source repositories is summarized in
+[`REPOSITORY_INVENTORY.md`](REPOSITORY_INVENTORY.md).
 
-### Suggestions and Feedback
-[Click here](https://docs.google.com/forms/d/e/1FAIpQLSdy7dATC6QmEL81FIUuymZ0Wy9vH1jHkvpY57OiMeKGqib_Ow/viewform) if you have any feedback or suggestions.
+## Validation contract
+
+Continuous integration checks that:
+
+1. maintained Python modules compile and pass tests;
+2. every notebook is valid notebook JSON with a Python kernel declaration;
+3. every consolidated file has a provenance record;
+4. no notebook source is lost during consolidation.
+
+Notebook validity does not imply that every historical cell runs under one
+universal environment. Dependency profiles and known compatibility limits are
+documented instead of hiding them.
+
+## Book
+
+The original repository accompanied [*Hands-On Q-Learning with
+Python*](https://www.amazon.com/dp/1789345804), published by Packt. The
+original chapter directories and license remain intact.
+
+## Author
+
+Nazia Habib is a research engineer working on deterministic representations
+of states, transitions, operators, and behavioral objects.

@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hands-on-q-learning-examples"
+version = "0.2.0"
+description = "Maintained examples and consolidated research notebooks for Hands-On Q-Learning with Python"
+readme = "README.md"
+requires-python = ">=3.10,<3.13"
+license = {file = "LICENSE"}
+dependencies = ["numpy>=1.26,<3"]
+
+[project.optional-dependencies]
+rl = ["gymnasium[toy-text,classic-control]>=1.0,<2"]
+notebooks = [
+    "ipykernel>=6,<8",
+    "jupyterlab>=4,<5",
+    "matplotlib>=3.8,<4",
+    "pandas>=2,<4",
+    "scipy>=1.11,<2",
+    "seaborn>=0.13,<1",
+    "sympy>=1.12,<2",
+]
+tensorflow = ["tensorflow>=2.16,<3"]
+torch = ["torch>=2.3,<3"]
+dev = ["nbformat>=5.10,<6", "pytest>=8,<9", "ruff>=0.9,<1"]
+
+[tool.setuptools]
+py-modules = []
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--strict-markers --strict-config"
+
+[tool.ruff]
+line-length = 88
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
