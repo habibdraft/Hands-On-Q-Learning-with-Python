@@ -26,12 +26,12 @@ tensorflow = ["tensorflow>=2.16,<3"]
 torch = ["torch>=2.3,<3"]
 dev = ["nbformat>=5.10,<6", "pytest>=8,<9", "ruff>=0.9,<1"]
 
-[tool.setuptools]
-py-modules = []
+[tool.setuptools.packages.find]
+include = ["examples*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-addopts = "--strict-markers --strict-config"
+addopts = "--strict-markers --strict-config --import-mode=importlib"
 
 [tool.ruff]
 line-length = 88
@@ -39,4 +39,3 @@ target-version = "py310"
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B"]
-
